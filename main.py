@@ -1,4 +1,4 @@
-from filters import GreenFilter, RedFilter, BlueFilter, Inversion, Intensifier, Blur
+from filters import GreenFilter, RedFilter, BlueFilter, Inversion, Intensifier, Blur, Contour
 from PIL import Image
 
 import os
@@ -67,6 +67,11 @@ def menu(image):
             "name": "Размытие",
             "description": "Размывает изображение.",
             "class_name": Blur()
+        },
+        "7": {
+            "name": "Выделение контуров",
+            "description": "Делает конутры объектов на изображении более чёткими.",
+            "class_name": Contour()
         }
     }
 
@@ -97,7 +102,7 @@ def menu(image):
     if verify_filter_use == "да":
         print("Применяем фильтр")
         fltr = filters[filter_num]["class_name"]
-        img = fltr.apply_to_pixel(image)
+        img = fltr.apply_filter(image)
 
         # Куда сохранить: /path/to/new_image.jpg
         path_to_save = input("Куда сохранить: ")
